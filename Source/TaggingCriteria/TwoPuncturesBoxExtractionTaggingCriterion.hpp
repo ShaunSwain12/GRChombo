@@ -71,7 +71,7 @@ class TwoPuncturesBoxExtractionTaggingCriterion
                     simd_max(abs(coords.x), abs(coords.y));
                 const data_t max_abs_xyz = simd_max(max_abs_xy, abs(coords.z));
                 auto regrid = simd_compare_lt(
-                    max_abs_xyz, 2.5 * factor * m_puncture_masses[ipuncture]);
+                    max_abs_xyz, 2.0 * factor * m_puncture_masses[ipuncture]);
                 criterion = simd_conditional(regrid, 100.0, criterion);
                 // if (m_level < m_max_level){
                 //     const Coordinates<data_t> coords_c(current_cell, m_dx,
