@@ -9,7 +9,7 @@
 verbosity = 0
 
 # location / naming of output files
-output_path = "/rds/homes/s/sxs2159/GRChombo/Simulation_Data/scatter_q1_P0p1145639_bNR9p7_D100_CPm0p0_CMm0p0_N192"
+output_path = ""
 chk_prefix = BinaryBHChk_
 plot_prefix = BinaryBHPlot_
 #restart_file = BinaryBHChk_000350.3d.hdf5
