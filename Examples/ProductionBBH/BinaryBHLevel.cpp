@@ -20,7 +20,7 @@
 #include "SixthOrderDerivatives.hpp"
 #include "SmallDataIO.hpp"
 #include "TraceARemoval.hpp"
-#include "TwoPuncturesBoxExtractionTaggingCriterion.hpp"
+#include "BinaryPunctureTaggingCriterion.hpp"
 #include "TwoPuncturesInitialData.hpp"
 #include "Weyl4.hpp"
 #include "WeylExtraction.hpp"
@@ -121,10 +121,13 @@ void BinaryBHLevel::computeTaggingCriterion(
 #endif /* USE_TWOPUNCTURES */
         auto puncture_coords =
             m_bh_amr.m_puncture_tracker.get_puncture_coords();
-        BoxLoops::loop(TwoPuncturesBoxExtractionTaggingCriterion(
-                           m_dx, m_level, m_p.max_level, m_p.extraction_params,
+        BoxLoops::loop(BinaryPunctureTaggingCriterion<FourthOrderDerivatives>(
+                           m_dx, m_level, m_p.tag_horizons_max_levels,
+                           m_p.tag_punctures_max_levels, m_p.extraction_params,
                            puncture_coords, m_p.activate_extraction,
-                           puncture_masses),
+                           m_p.track_punctures, puncture_masses,
+                           m_p.bh_tagging_buffers,
+                           m_p.puncture_tag_min_separation),
                        current_state, tagging_criterion);
     }
     else

@@ -40,6 +40,15 @@ class SimulationParameters : public SimulationParametersBase
         pp.load("calculate_constraint_norms", calculate_constraint_norms,
                 false);
 
+        // Tagging criterion for unequal mass binaries
+        pp.load("bh_tagging_buffers", bh_tagging_buffers, {0.5, 0.5});
+        pp.load("tag_punctures_max_levels", tag_punctures_max_levels,
+                {max_level, max_level});
+        pp.load("tag_horizons_max_levels", tag_horizons_max_levels,
+                {max_level, max_level});
+        pp.load("puncture_tag_min_separation", puncture_tag_min_separation,
+                1.0e-3);
+
 #ifdef USE_AHFINDER
         pp.load("AH_1_initial_guess", AH_1_initial_guess,
                 0.5 * bh1_params.mass);
@@ -312,6 +321,12 @@ class SimulationParameters : public SimulationParametersBase
     // e.g. for puncture tracking/tagging
     BoostedBH::params_t bh2_params;
     BoostedBH::params_t bh1_params;
+
+    // Tagging criterion for unequal mass binaries
+    std::array<double, 2> bh_tagging_buffers;
+    std::array<int, 2> tag_punctures_max_levels;
+    std::array<int, 2> tag_horizons_max_levels;
+    double puncture_tag_min_separation;
 
 #ifdef USE_TWOPUNCTURES
     double tp_offset_plus, tp_offset_minus;
